@@ -1,6 +1,9 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import dotenv from "dotenv";
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://admin:12345@cluster0.qyb0v.mongodb.net/node_db?retryWrites=true&w=majority";
+dotenv.config();
+
+const uri = process.env.MONGODB_URI;
 
 export const client = new MongoClient(uri, {
   serverApi: {
@@ -10,6 +13,9 @@ export const client = new MongoClient(uri, {
   },
 });
 
-export const database = client.db(process.env.MONGODB_DB || "node_db");
-// export const productCollection = database.collection("products");
-// export const reviewCollection = database.collection("reviews");
+export const database = client.db(process.env.MONGODB_DB);
+
+export const userCollection = database.collection("users");
+export const categoryCollection = database.collection("categories");
+export const productCollection = database.collection("products");
+export const reviewCollection = database.collection("reviews");

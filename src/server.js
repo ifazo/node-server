@@ -2,11 +2,15 @@ import { createServer } from "http";
 import { client } from "./db.js";
 import productRoutes from "./routes/product.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 
 const server = createServer(async (req, res) => {
   try {
     await client.connect();
-    if (req.url?.startsWith("/api/products")) {
+    if (req.url?.startsWith("/api/categories")) {
+      await categoryRoutes(req, res);
+    }
+    else if (req.url?.startsWith("/api/products")) {
       await productRoutes(req, res);
     } else if (req.url?.startsWith("/api/reviews")) {
       await reviewRoutes(req, res);

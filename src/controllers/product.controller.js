@@ -1,5 +1,5 @@
-import { productCollection } from "../models/product.model.js";
 import { ObjectId } from "mongodb";
+import { productCollection } from "../db.js";
 
 export const getAllProducts = async () => {
   return await productCollection.find({}).toArray();
